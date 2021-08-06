@@ -1,0 +1,3 @@
+[submodule "Rocky/vendor/spdlog"]
+	path = Rocky/vendor/spdlog
+	url = https://github.com/gabime/spdlog

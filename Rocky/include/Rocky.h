@@ -7,6 +7,10 @@
 
 #include "../src/Rocky/Application.h"
 
+
+#include "../src/Rocky/Log.h"
+
+
 // ---Entry Point---------------------
 #include "../src/Rocky/EntryPoint.h"
 // -----------------------------------
