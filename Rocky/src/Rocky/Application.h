@@ -7,20 +7,25 @@
 
 #include "Rocky/Core.h"
 #include "Rocky/Events/Event.h"
+#include "Rocky/Window.h"
 
 namespace Rocky {
 
-    class ROCKY_API Application
-            {
-            public:
-                Application();
-                virtual ~Application();
+    class ROCKY_API Application {
+    public:
+        Application();
 
-                void Run();
-            };
+        virtual ~Application();
+
+        void Run();
+
+    private:
+        std::unique_ptr<Window> m_Window;
+        bool m_Running = true;
+    };
 
     // To be defined in CLIENT
-    Application* CreateApplication();
+    Application *CreateApplication();
 
 }
 

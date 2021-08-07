@@ -1,10 +1,7 @@
-//
-// Created by Jan on 8/6/2021.
-//
-
 #ifndef ROCKY_EVENT_H
 #define ROCKY_EVENT_H
 
+#include "rockypch.h"
 #include "Rocky/Core.h"
 
 namespace Rocky {
@@ -21,7 +18,6 @@ namespace Rocky {
         AppRender,
         KeyPressed,
         KeyReleased,
-        KeyTyped,
         MouseButtonPressed,
         MouseButtonReleased,
         MouseMoved,
@@ -37,55 +33,56 @@ namespace Rocky {
         EventCategoryMouseButton = BIT(4)
     };
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 virtual EventType GetEventType() const override { return GetStaticType(); }\
 virtual const char* GetName() const override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-    class Event {
-    public:
-        virtual ~Event() = default;
+    class ROCKY_API Event {
+        friend class EventDispatcher;
 
-        bool Handled = false;
+        public:
+            virtual EventType GetEventType() const = 0;
 
-        virtual EventType GetEventType() const = 0;
+            virtual const char *GetName() const = 0;
 
-        virtual const char *GetName() const = 0;
+            virtual int GetCategoryFlags() const = 0;
 
-        virtual int GetCategoryFlags() const = 0;
+            virtual std::string ToString() const { return GetName(); }
 
-        virtual std::string ToString() const { return GetName(); }
+            inline bool IsInCategory(EventCategory category) {
+                return GetCategoryFlags() & category;
+            }
 
-        bool IsInCategory(EventCategory category) {
-            return GetCategoryFlags() & category;
-        }
+        protected:
+            bool m_Handled = false;
     };
 
     class EventDispatcher {
-    public:
-        EventDispatcher(Event &event)
-                : m_Event(event) {
-        }
-
-        // F will be deduced by the compiler
-        template<typename T, typename F>
-        bool Dispatch(const F &func) {
-            if (m_Event.GetEventType() == T::GetStaticType()) {
-                m_Event.Handled |= func(static_cast<T &>(m_Event));
-                return true;
+        template<typename T>
+        using EventFn = std::function<bool(T &)>;
+        public:
+            EventDispatcher(Event &event)
+                    : m_Event(event) {
             }
-            return false;
-        }
 
-    private:
-        Event &m_Event;
+            template<typename T>
+            bool Dispatch(EventFn<T> func) {
+                if (m_Event.GetEventType() == T::GetStaticType()) {
+                    m_Event.m_Handled = func(*(T *) &m_Event);
+                    return true;
+                }
+                return false;
+            }
+
+        private:
+            Event &m_Event;
     };
 
     inline std::ostream &operator<<(std::ostream &os, const Event &e) {
         return os << e.ToString();
     }
-
 }
 
 #endif //ROCKY_EVENT_H

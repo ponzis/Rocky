@@ -17,8 +17,13 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Rocky/Log.h"
+
+
 #ifdef ROCKY_PLATFORM_WINDOWS
-	#include <Windows.h>
+
+    #include <Windows.h>
+
 #endif
 
 #endif //ROCKY_ROCKYPCH_H

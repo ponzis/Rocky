@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../Rocky/src/Rocky.h"
+#include "Rocky.h"
 
 
 class Sandbox : public Rocky::Application

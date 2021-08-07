@@ -14,5 +14,6 @@ IF (WIN32)
             $<TARGET_FILE:Rocky>
             $<TARGET_FILE_DIR:Sandbox>/$<TARGET_FILE_NAME:Rocky>)
 ENDIF(WIN32)
+add_compile_definitions(ROCKY_ENABLE_ASSERTS)
 
 target_link_libraries(Sandbox PRIVATE Rocky)
