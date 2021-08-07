@@ -6,6 +6,7 @@
 #define ROCKY_ROCKY_H
 
 #include "Rocky/Application.h"
+#include "Rocky/Layer.h"
 #include "Rocky/Log.h"
 
 // ---Entry Point---------------------

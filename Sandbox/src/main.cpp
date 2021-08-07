@@ -2,22 +2,35 @@
 #include "Rocky.h"
 
 
-class Sandbox : public Rocky::Application
-        {
-        public:
-            Sandbox()
-            {
-                printf("Starting the application\n ");
-            }
+class ExampleLayer : public Rocky::Layer {
+public:
+    ExampleLayer()
+            : Layer("Example") {
+    }
 
-            ~Sandbox()
-            {
+    void OnUpdate() override {
+        ROCKY_INFO("ExampleLayer::Update");
+    }
 
-            }
+    void OnEvent(Rocky::Event &event) override {
+        ROCKY_TRACE("{0}", event);
+    }
 
-        };
+};
 
-Rocky::Application* Rocky::CreateApplication()
-{
+class Sandbox : public Rocky::Application {
+public:
+    Sandbox() {
+        ROCKY_INFO("Starting the application ");
+        PushLayer(new ExampleLayer());
+    }
+
+    ~Sandbox() {
+        ROCKY_INFO("Stopping the application ");
+    }
+
+};
+
+Rocky::Application *Rocky::CreateApplication() {
     return new Sandbox();
 }

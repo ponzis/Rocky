@@ -28,7 +28,7 @@ namespace Rocky {
     // Interface representing a desktop system based Window
     class ROCKY_API Window {
     public:
-        using EventCallbackFn = std::function<void(Event & )>;
+        using EventCallbackFn = std::function<void(Event &)>;
 
         virtual ~Window() {}
 

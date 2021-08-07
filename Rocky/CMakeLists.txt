@@ -6,12 +6,15 @@ set(CMAKE_CXX_STANDARD 14)
 set(ROCKY_SRCS
         src/Rocky/Application.cpp
         src/Rocky/Log.cpp
-        src/Platform/Windows/WindowsWindow.cpp
-        )
+        src/Rocky/Layer.cpp
+        src/Rocky/LayerStack.cpp
+
+        src/Platform/Windows/WindowsWindow.cpp)
 
 set(ROCKY_ALL_HEADERS
         src/Rocky.h
         src/rockypch.h
+
         src/Rocky/Core.h
         src/Rocky/Log.h
         src/Rocky/Window.h
@@ -20,6 +23,9 @@ set(ROCKY_ALL_HEADERS
         src/Rocky/Events/ApplicationEvent.h
         src/Rocky/Events/KeyEvent.h
         src/Rocky/Events/MouseEvent.h
+        src/Rocky/Layer.h
+        src/Rocky/LayerStack.h
+
         src/Platform/Windows/WindowsWindow.h)
 
 

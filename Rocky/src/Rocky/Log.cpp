@@ -7,7 +7,7 @@
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-namespace Rocky{
+namespace Rocky {
 
     std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
     std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
