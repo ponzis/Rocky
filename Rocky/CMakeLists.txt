@@ -33,16 +33,25 @@ add_library(Rocky SHARED ${ROCKY_SRCS} ${ROCKY_ALL_HEADERS})
 
 IF (WIN32)
     add_compile_definitions(ROCKY_PLATFORM_WINDOWS)
-ENDIF(WIN32)
-add_compile_definitions(ROCKY_BUILD_DLL)
+    add_compile_definitions(ROCKY_BUILD_DLL)
+
+
+    add_subdirectory(vendor/GLFW)
+    target_link_libraries(Rocky PRIVATE glfw)
+
+    add_compile_definitions(GLFW_INCLUDE_NONE)
+    add_subdirectory(vendor/Glad)
+    target_link_libraries(Rocky PRIVATE glad)
+
+ENDIF()
 add_compile_definitions(ROCKY_ENABLE_ASSERTS)
+
+
 
 add_subdirectory(vendor/spdlog)
 target_link_libraries(Rocky PUBLIC spdlog)
 
 
-add_subdirectory(vendor/GLFW)
-target_link_libraries(Rocky PUBLIC glfw)
 
 find_package(OpenGL REQUIRED)
 target_include_directories(Rocky PRIVATE ${OPENGL_INCLUDE_DIR})
