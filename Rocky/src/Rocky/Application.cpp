@@ -2,7 +2,7 @@
 // Created by Jan on 8/6/2021.
 //
 #include "rockypch.h"
-#include "Application.h"
+#include "Rocky/Application.h"
 
 #include "Rocky/Log.h"
 
@@ -12,7 +12,12 @@ namespace Rocky {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
+    Application *Application::s_Instance = nullptr;
+
     Application::Application() {
+        ROCKY_CORE_ASSERT(!s_Instance, "Application already exists!");
+        s_Instance = this;
+
         m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
     }
@@ -22,10 +27,12 @@ namespace Rocky {
 
     void Application::PushLayer(Layer *layer) {
         m_LayerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer *layer) {
         m_LayerStack.PushOverlay(layer);
+        layer->OnAttach();
     }
 
     void Application::OnEvent(Event &e) {
@@ -38,7 +45,6 @@ namespace Rocky {
                 break;
         }
     }
-
 
     void Application::Run() {
         while (m_Running) {
@@ -56,4 +62,5 @@ namespace Rocky {
         m_Running = false;
         return true;
     }
+
 }

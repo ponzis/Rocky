@@ -4,3 +4,6 @@
 [submodule "Rocky/vendor/GLFW"]
 	path = Rocky/vendor/GLFW
 	url = https://github.com/glfw/glfw.git
+[submodule "Rocky/vendor/imgui"]
+	path = Rocky/vendor/imgui
+	url = https://github.com/ocornut/imgui.git

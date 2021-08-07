@@ -3,11 +3,11 @@
 //
 
 #include "rockypch.h"
-#include "Platform/Windows/WindowsWindow.h"
+#include "WindowsWindow.h"
 
 #include "Rocky/Events/ApplicationEvent.h"
-#include "Rocky/Events/KeyEvent.h"
 #include "Rocky/Events/MouseEvent.h"
+#include "Rocky/Events/KeyEvent.h"
 
 #include <glad/glad.h>
 
@@ -18,7 +18,6 @@ namespace Rocky {
     static void GLFWErrorCallback(int error, const char *description) {
         ROCKY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
     }
-
 
     Window *Window::Create(const WindowProps &props) {
         return new WindowsWindow(props);
@@ -42,7 +41,7 @@ namespace Rocky {
         if (!s_GLFWInitialized) {
             // TODO: glfwTerminate on system shutdown
             int success = glfwInit();
-            ROCKY_CORE_ASSERT(success, "Could not intialize GLFW!");
+            ROCKY_CORE_ASSERT(success, "Could not initialize GLFW!");
             glfwSetErrorCallback(GLFWErrorCallback);
             s_GLFWInitialized = true;
         }
@@ -50,8 +49,7 @@ namespace Rocky {
         m_Window = glfwCreateWindow((int) props.Width, (int) props.Height, m_Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_Window);
         int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        ROCKY_CORE_ASSERT(status, "Failed to initialized GLAD!");
-
+        ROCKY_CORE_ASSERT(status, "Failed to initialize Glad!");
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
 
@@ -125,7 +123,6 @@ namespace Rocky {
         });
     }
 
-
     void WindowsWindow::Shutdown() {
         glfwDestroyWindow(m_Window);
     }
@@ -147,4 +144,5 @@ namespace Rocky {
     bool WindowsWindow::IsVSync() const {
         return m_Data.VSync;
     }
+
 }

@@ -9,6 +9,8 @@
 #include "Rocky/Layer.h"
 #include "Rocky/Log.h"
 
+#include "Rocky/ImGui/ImGuiLayer.h"
+
 // ---Entry Point---------------------
 #include "Rocky/EntryPoint.h"
 // -----------------------------------

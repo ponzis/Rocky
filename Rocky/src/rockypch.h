@@ -21,9 +21,7 @@
 
 
 #ifdef ROCKY_PLATFORM_WINDOWS
-
     #include <Windows.h>
-
 #endif
 
 #endif //ROCKY_ROCKYPCH_H

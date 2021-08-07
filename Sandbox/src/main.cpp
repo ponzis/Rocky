@@ -23,6 +23,7 @@ public:
     Sandbox() {
         ROCKY_INFO("Starting the application ");
         PushLayer(new ExampleLayer());
+        PushOverlay(new Rocky::ImGuiLayer());
     }
 
     ~Sandbox() {
