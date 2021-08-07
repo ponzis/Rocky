@@ -5,10 +5,9 @@
 #ifndef ROCKY_LOG_H
 #define ROCKY_LOG_H
 
-#include <memory>
-
-#include "Core.h"
+#include "Rocky/Core.h"
 #include "spdlog/spdlog.h"
+#include "spdlog/fmt/ostr.h"
 
 namespace Rocky {
     class ROCKY_API Log {

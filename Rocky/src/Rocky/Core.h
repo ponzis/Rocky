@@ -16,4 +16,6 @@
 	#error ROCKY only supports Windows!
 #endif
 
+#define BIT(x) (1 << x)
+
 #endif //ROCKY_CORE_H

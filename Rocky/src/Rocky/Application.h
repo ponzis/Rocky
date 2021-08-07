@@ -5,7 +5,8 @@
 #ifndef ROCKY_APPLICATION_H
 #define ROCKY_APPLICATION_H
 
-#include "Core.h"
+#include "Rocky/Core.h"
+#include "Rocky/Events/Event.h"
 
 namespace Rocky {
 

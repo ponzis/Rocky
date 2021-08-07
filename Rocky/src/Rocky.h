@@ -5,14 +5,11 @@
 #ifndef ROCKY_ROCKY_H
 #define ROCKY_ROCKY_H
 
-#include "../src/Application.h"
-
-
-#include "../src/Log.h"
-
+#include "Rocky/Application.h"
+#include "Rocky/Log.h"
 
 // ---Entry Point---------------------
-#include "../src/EntryPoint.h"
+#include "Rocky/EntryPoint.h"
 // -----------------------------------
 
 #endif //ROCKY_ROCKY_H

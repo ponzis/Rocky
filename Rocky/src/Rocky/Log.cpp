@@ -2,7 +2,8 @@
 // Created by Jan on 8/6/2021.
 //
 
-#include "Log.h"
+#include "rockypch.h"
+#include "Rocky/Log.h"
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 
